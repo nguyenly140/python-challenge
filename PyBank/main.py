@@ -57,16 +57,31 @@ def analyze(budgetData):
                 greatestDecMonth = months[i]
             #print(f"{change} = {int(i)} - {num}")
         num = int(profit_loss[i])
-    print(f"Total Months: {len(months)}")
-    print(f"Total: ${total}")
+
+    totalMonths = f"Total Months: {len(months)}"
+    print(totalMonths)
+    totalResult = f"Total: ${total}"
+    print(totalResult)
 #   * Calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
     totalChange = "{:.2f}".format(totalChange/len(months))
-    print(f"Average Change: ${totalChange}")
+    AveChange = f"Average Change: ${totalChange}"
+    print(AveChange)
 #   * The greatest increase in profits (date and amount) over the entire period
-    print(f"Greatest Increase in Profits: {greatestIncMonth} (${greatestInc})")
+    greatInc = f"Greatest Increase in Profits: {greatestIncMonth} (${greatestInc})"
+    print(greatInc)
 #   * The greatest decrease in profits (date and amount) over the entire period
-    print(f"Greatest Decrease in Profits: {greatestDecMonth} (${greatestDec})")
+    greatDec = f"Greatest Decrease in Profits: {greatestDecMonth} (${greatestDec})"
+    print(greatDec)
+    
+
+# Write results into text file
+    output_file = os.path.join('..', 'PyBank', 'analysis', 'result.csv')
+    with open(output_file, 'w') as resultFile:
+        resultFile.write("Financial Analysis\n----------------------------\n" + totalMonths + "\n" + totalResult + "\n" + AveChange + "\n" + greatInc + "\n" + greatDec)
+
 with open(budgetData_csv, 'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     header = next(csvreader)
     analyze(csvreader)
+
+
