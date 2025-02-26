@@ -78,7 +78,7 @@ def analyze(budgetData):
     output_file = os.path.join('..', 'PyBank', 'analysis', 'result.csv')
     with open(output_file, 'w') as resultFile:
         resultFile.write("Financial Analysis\n----------------------------\n" + totalMonths + "\n" + totalResult + "\n" + AveChange + "\n" + greatInc + "\n" + greatDec)
-
+        resultFile.close()
 with open(budgetData_csv, 'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     header = next(csvreader)

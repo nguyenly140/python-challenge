@@ -64,9 +64,20 @@ def analyze(electionData):
     mostVoteCandidate = max(candidateSet, key=candidateSet.get)
     print("Election Results\n-------------------------")
     print(f"Total Votes: {totalVotes}\n-------------------------")
+    textInfo = []
     for m in candidateSet:
         print(f"{m}: {candidateSet[m][1]} ({candidateSet[m][0]})")
+        textInfo.append(f"{m}: {candidateSet[m][1]} ({candidateSet[m][0]})")
+    
     print(f"-------------------------\nWinner: {mostVoteCandidate}\n-------------------------")
+        #   Write into text file
+    output_file = os.path.join('..', 'PyRoll', 'analysis', 'result.csv')
+    with open(output_file, 'w') as resultFile:
+        resultFile.write(f"Election Results\n-------------------------\nTotal Votes: {totalVotes}\n-------------------------")
+        for n in textInfo:
+            resultFile.write(f"\n{n}")
+        resultFile.write(f"\n-------------------------\nWinner: {mostVoteCandidate}\n-------------------------")
+        resultFile.close()
 
 with open(electionFile_csv, 'r') as csvFile:
     csvreader = csv.reader(csvFile, delimiter=',')
